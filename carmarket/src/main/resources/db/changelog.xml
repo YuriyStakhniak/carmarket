@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+
+<preConditions onFail="HALT">
+    <dbms type="postgresql"/>
+</preConditions>
+    <changeSet id="1" author="yurezzz">
+        <createTable tableName="CARS">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true" primaryKeyName="cars_id"/>
+            </column>
+            <column name="CAR_BRAND" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CAR_MODEL" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CAR_TYPE" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="YEAR" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="NUMERIC(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="yurezzz">
+        <createTable tableName="SITE_USERS">
+            <column name="FIRST_NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TIME_ON_APP" type="NUMERIC(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MOBILE_PHONE" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="yurezzz">
+        <modifyDataType columnName="TIME_ON_APP"
+                        newDataType="BIGINT"
+                        schemaName="public"
+                        tableName="SITE_USERS"/>
+    </changeSet>
+    <changeSet id="4" author="yurezzz">
+        <dropTable cascadeConstraints="true"
+                   schemaName="public"
+                   tableName="SITE_USERS"/>
+    </changeSet>
+    <changeSet id="5" author="yurezzz">
+
+        <createTable tableName="SITE_USERS">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true" primaryKeyName="users_id"/>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TIME_ON_APP" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MOBILE_PHONE" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>
