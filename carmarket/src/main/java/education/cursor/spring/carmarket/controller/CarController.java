@@ -24,7 +24,7 @@ public class CarController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
-    public Response submitNewCar(@RequestBody @NotNull @Valid CarDTO carDTO){
+    public Response submitNewCar(@RequestBody @NotNull @Valid CarDTO carDTO) {
         service.saveNewCar(carDTO);
         return Response.builder()
                 .message("car was saved")
@@ -35,7 +35,7 @@ public class CarController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     @Transactional(readOnly = true)
-    public Response getAllCars(){
+    public Response getAllCars() {
         return Response.builder()
                 .message("You.ve got all cars from DB")
                 .info(Collections.singletonMap("cars", service.getAllCarsStream()
@@ -45,7 +45,7 @@ public class CarController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
-    public Response getCarById(@PathVariable("id") Long id){
+    public Response getCarById(@PathVariable("id") Long id) {
         return Response.builder()
                 .message(String.format("Founded car by id", id))
                 .info(Collections.singletonMap("car", service.getCarById(id)))
@@ -54,7 +54,7 @@ public class CarController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("sorted_by_year")
-    public Response getCarsSortedByYear(){
+    public Response getCarsSortedByYear() {
         return Response.builder()
                 .message("Sorted cars by year")
                 .info(Collections.singletonMap("cars", service.getSortedCarsByYear()))
@@ -63,7 +63,7 @@ public class CarController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("sorted_by_price")
-    public Response getCarsSortedByPrice(){
+    public Response getCarsSortedByPrice() {
         return Response.builder()
                 .message("Sorted cars by price")
                 .info(Collections.singletonMap("cars", service.getSortedCarsByPrice()))
@@ -72,7 +72,7 @@ public class CarController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
-    public Response deleteCar(@PathVariable("id") Long id){
+    public Response deleteCar(@PathVariable("id") Long id) {
         service.delete(id);
         return Response.builder()
                 .message(String.format("deleted car by id", id))

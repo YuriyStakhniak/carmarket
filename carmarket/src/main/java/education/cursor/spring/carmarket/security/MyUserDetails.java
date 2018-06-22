@@ -12,22 +12,22 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MyUserDetails implements UserDetailsService {
 
-  private final UserRepository repository;
+    private final UserRepository repository;
 
-  @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    final User user = repository.findByUsername(username);
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        final User user = repository.findByUsername(username);
 
-    if (user == null) {
-      throw new UsernameNotFoundException("User '" + username + "' not found");
+        if (user == null) {
+            throw new UsernameNotFoundException("User '" + username + "' not found");
+        }
+        return org.springframework.security.core.userdetails.User
+                .withUsername(username)
+                .password(user.getPassword())
+                .accountExpired(false)
+                .accountLocked(false)
+                .credentialsExpired(false)
+                .disabled(false)
+                .build();
     }
-    return org.springframework.security.core.userdetails.User
-        .withUsername(username)
-        .password(user.getPassword())
-        .accountExpired(false)
-        .accountLocked(false)
-        .credentialsExpired(false)
-        .disabled(false)
-        .build();
-  }
 }

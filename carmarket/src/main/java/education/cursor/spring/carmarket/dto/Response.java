@@ -16,5 +16,5 @@ public class Response {
 
     private String message;
     @Singular
-    private List<Map<String,Object>> infos;
+    private List<Map<String, Object>> infos;
 }

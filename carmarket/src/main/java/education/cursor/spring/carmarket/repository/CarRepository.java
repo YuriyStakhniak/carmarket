@@ -12,7 +12,7 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     @Query(value = "select * from cars", nativeQuery = true)
     Stream<Car> getAll();
 
-    Car getCarById (Long id);
+    Car getCarById(Long id);
 
     @Query(value = "select * from cars ORDER BY year", nativeQuery = true)
     List<Car> getAllCarsSortedByYear();

@@ -54,7 +54,7 @@ public class CarService implements ICarService {
     @Override
     @Transactional
     public void delete(Long id) {
-        if (getCarById(id)== null){
+        if (getCarById(id) == null) {
             throw new UserNotFoundException("car not found");
         }
         repository.deleteCarById(id);

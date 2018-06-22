@@ -20,39 +20,39 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService implements IUserService {
 
-  private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-  private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-  private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
-  @Autowired
-  private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-  public String signin(String username, String password) {
-    try {
-      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-      return jwtTokenProvider.createToken(username);
-    } catch (AuthenticationException e) {
-      throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
+    public String signin(String username, String password) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            return jwtTokenProvider.createToken(username);
+        } catch (AuthenticationException e) {
+            throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
     }
-  }
 
-  public String signup(User user) {
-    if (!userRepository.existsByUsername(user.getFirstName())) {
-      user.setPassword(passwordEncoder.encode(user.getPassword()));
-      userRepository.save(user);
-      return jwtTokenProvider.createToken(user.getFirstName());
-    } else {
-      throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+    public String signup(User user) {
+        if (!userRepository.existsByUsername(user.getFirstName())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+            return jwtTokenProvider.createToken(user.getFirstName());
+        } else {
+            throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
     }
-  }
 
-  public User search(String username) {
-    User user = userRepository.findByUsername(username);
-    if (user == null) {
-      throw new CustomException("The user doesn't exist", HttpStatus.NOT_FOUND);
+    public User search(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new CustomException("The user doesn't exist", HttpStatus.NOT_FOUND);
+        }
+        return user;
     }
-    return user;
-  }
 }

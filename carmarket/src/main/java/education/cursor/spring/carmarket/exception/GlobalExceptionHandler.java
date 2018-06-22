@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(CarNotFoundException.class)
-    public ResponseMsg handleCarNotFoundException(CarNotFoundException e){
+    public ResponseMsg handleCarNotFoundException(CarNotFoundException e) {
         ResponseMsg msg = new ResponseMsg(e.getMessage());
         return msg;
     }

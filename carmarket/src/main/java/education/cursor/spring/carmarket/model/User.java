@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -21,6 +20,7 @@ public class User {
         this.timeOnApp = System.currentTimeMillis();
         this.mobilePhone = mobilePhone;
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
