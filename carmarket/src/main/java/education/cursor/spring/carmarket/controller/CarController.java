@@ -69,4 +69,14 @@ public class CarController {
                 .info(Collections.singletonMap("cars", service.getSortedCarsByPrice()))
                 .build();
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping("/{id}")
+    public Response deleteCar(@PathVariable("id") Long id){
+        service.delete(id);
+        return Response.builder()
+                .message(String.format("deleted car by id", id))
+                .info(Collections.singletonMap("SomeValue", 13))
+                .build();
+    }
 }

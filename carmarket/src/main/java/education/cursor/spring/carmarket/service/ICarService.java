@@ -18,4 +18,6 @@ public interface ICarService {
 
     List<Car> getSortedCarsByPrice();
 
+    void delete(Long id);
+
 }

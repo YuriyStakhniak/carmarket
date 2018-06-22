@@ -2,6 +2,8 @@ package education.cursor.spring.carmarket.service.impl;
 
 import education.cursor.spring.carmarket.dto.CarDTO;
 import education.cursor.spring.carmarket.exception.CarNotFoundException;
+import education.cursor.spring.carmarket.exception.CustomException;
+import education.cursor.spring.carmarket.exception.UserNotFoundException;
 import education.cursor.spring.carmarket.model.Car;
 import education.cursor.spring.carmarket.repository.CarRepository;
 import education.cursor.spring.carmarket.service.ICarService;
@@ -47,5 +49,14 @@ public class CarService implements ICarService {
     @Override
     public List<Car> getSortedCarsByPrice() {
         return repository.getAllCarsSortedByPrice();
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        if (getCarById(id)== null){
+            throw new UserNotFoundException("car not found");
+        }
+        repository.deleteCarById(id);
     }
 }

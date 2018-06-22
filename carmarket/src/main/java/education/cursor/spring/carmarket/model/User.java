@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -27,6 +28,8 @@ public class User {
     @Email(message = "INVALID EMAIL")
     @Column(unique = true)
     private String email;
+    @NotNull
+    private String username;
     @NotNull
     private String password;
     @Column(name = "FIRST_NAME")
